@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - web-development/**  # Modify the path to match your local folder structure
+      - web-development/**
 
 jobs:
   build:
@@ -22,16 +22,16 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-        working-directory: web-development  # Specify the working directory
+        working-directory: web-development
 
       - name: Build website
         run: yarn build
-        working-directory: web-development  # Specify the working directory
+        working-directory: web-development
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web-development/build  # Specify the correct build path
+          path: web-development/build
 
   deploy:
     name: Deploy to GitHub Pages
