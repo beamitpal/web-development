@@ -6,7 +6,7 @@ on:
   push:
     branches: [main]
     paths:
-      - web-development/** # Modify the path to match your project structure
+      - web-development/**  # Modify the path to match your project structure
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,10 +29,10 @@ env:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -45,16 +45,16 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install --frozen-lockfile --non-interactive
-        working-directory: web-development # Specify the working directory
+        working-directory: web-development  # Specify the working directory
       - name: Build
         run: yarn build
-        working-directory: web-development # Specify the working directory
+        working-directory: web-development  # Specify the working directory
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: web-development/build # Specify the correct build path
+          path: web-development/build  # Specify the correct build path
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
